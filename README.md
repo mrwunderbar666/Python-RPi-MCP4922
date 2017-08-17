@@ -12,77 +12,77 @@ To install the library run the following commands on a Raspberry Pi or other Deb
 ### Install Git 
 If you don't have it already:
 
-	```shell
-    sudo apt-get install git build-essential python-dev
-    ```
-    
+```shell
+sudo apt-get install git build-essential python-dev
+```
+
 ### Requirements
 To run this module you need RPi.GPIO and spidev:
 
-	```shell
-    sudo pip install RPi.GPIO
-    sudo pip install spidev
-    ```
-    
+```shell
+sudo pip install RPi.GPIO
+sudo pip install spidev
+```
+
 ### Clone the repository
 
-	```shell
-    git clone https://github.com/mrwunderbar666/Python-RPi-MCP4922.git
-    ```
-    
+```shell
+git clone https://github.com/mrwunderbar666/Python-RPi-MCP4922.git
+```
+
 ### Install with Setup.py
 
-	```shell
-    cd Python-RPi-MCP4922
-    sudo python setup.py install
-	```
-	
+```shell
+cd Python-RPi-MCP4922
+sudo python setup.py install
+```
+
 ## Software
 ### Getting started
 
 Go to the example directory and execute the test script:
 
-	```shell
-    cd examples
-    sudo python MCP4922_test.py
-    ```
-    
+```shell
+cd examples
+sudo python MCP4922_test.py
+```
+
 This script will initialize the MCP4922 and incrementally increase the voltage on both channels. Then it will decrease the voltage and loop forever.
 
 If you want to manually set the channel and voltage, you can use the other test script:
 
-	```shell
-    sudo python MCP4922_set.py
-    ```
-    
+```shell
+sudo python MCP4922_set.py
+```
+
 ### Use it in your own code
 
 #### Setup
 First import the required GPIO module in python:
 
-	```python    
-    import RPi.GPIO as GPIO
-    ```
+```python    
+import RPi.GPIO as GPIO
+```
 
 Set your pin mode to BCM:
 
-	```python
-    GPIO.setmode(GPIO.BCM)
-    ``` 
+```python
+GPIO.setmode(GPIO.BCM)
+``` 
 
 and then import the MCP4922 module:
-	
-	```python
-    from MCP4922 import MCP4922
-    ```
-    
+
+```python
+from MCP4922 import MCP4922
+```
+
 #### MCP4922 Class
 The MCP4922 Class takes 3 arguments: **spibus**, **spidevice** and **cs**.
 To configure just simple use this code in python:
 
-	```python
-    dac = MCP4922(spibus=0, spidevice=0, cs=8)
-    ```
+```python
+dac = MCP4922(spibus=0, spidevice=0, cs=8)
+```
 
 ##### spibus
 Select the bus for your MCP4922. Should be either 0 or 1. 
@@ -100,13 +100,13 @@ Also checkout the spidev documentation for more details.
 Chip select pin. Enter the pin number (Broadcom or Physical pin) where the MCP4922 is connected to.
 If no argument is given it will turn to the default of 8 (Broadcom pin numbering) or 24 (physical pin numbering).
 
- 
+
 #### setVoltage(channel, value)
 This method sets the desired output voltage at the requested channel. It is as easy as:
 
-	```python
-    dac.setVoltage(0, 2048)
-    ```
+```python
+dac.setVoltage(0, 2048)
+```
 
 This will set the voltage output to 50% of the reference voltage.
 
@@ -128,28 +128,28 @@ Note that the output voltage cannot exceed the supply voltage from pin 1 (VDD).
 
 Example:
 
-	```python
-    dac.setVoltage_gain(0, 2048)
-    ```
-    
+```python
+dac.setVoltage_gain(0, 2048)
+```
+
 #### setVoltage_buffered(channel, value)
 Using the buffer feature of the MCP4922, refer to the datasheet for details.
 
 Example:
 
-    ```python
-    dac.setVoltage_buffered(0, 2048)
-    ```
+```python
+dac.setVoltage_buffered(0, 2048)
+```
 
 #### shutdown(channel)
 Completely shutdown selected channel for power saving. Sets the output of selected channel to 0 and 500K Ohms. Read Datasheet (SHDN) for details.
 
 Example:
-    
-    ```python
-    dac.shutdown(1)
-    ```
-    
+
+```python
+dac.shutdown(1)
+```
+
 ## Hardware
 
 Here is an example of hooking up your MCP4922 to your Raspberry Pi.
