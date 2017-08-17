@@ -120,8 +120,8 @@ Example:
 Here is an example of hooking up your MCP4922 to your Raspberry Pi.
 Of course no warranties for any damage.
 
-![MCP4922 Wiring Example](https://github.com/mrwunderbar666/Python-RPi-MCP4922/documentation/mcp4922sketch_bb.png)
+![MCP4922 Wiring Example](https://github.com/mrwunderbar666/Python-RPi-MCP4922/raw/master/documentation/mcp4922sketch_bb.png)
 
-Also: ** Refer to the datasheet **
+Also: **Refer to the datasheet**
 
 
