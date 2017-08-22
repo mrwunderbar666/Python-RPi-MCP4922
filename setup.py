@@ -10,7 +10,7 @@ classifiers = ['Development Status :: 3 - Alpha'
                'Topic :: System :: Hardware']
 
 setup(name              = 'Python_RPi_MCP4922',
-      version           = '0.1',
+      version           = '0.2b',
       author            = 'Paul Balluff',
       author_email      = 'paul.balluff@gmail.com',
       description       = 'Python code to use the MCP4922 digital to analog converter with a Raspberry Pi.',
