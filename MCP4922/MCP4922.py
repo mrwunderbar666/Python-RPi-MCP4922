@@ -84,6 +84,9 @@ class MCP4922(object):
 
         GPIO.setup(self.cs, GPIO.OUT)
         GPIO.output(self.cs, 1)
+        # As soon as MCP4922 object is created spidev bus and device are opened
+        # otherwise causes memory leak and creates Errno 24
+        self.spi.open(self.spibus, self.spi.spidevice)
 
     def setVoltage(self, channel, value):
         """
@@ -102,14 +105,14 @@ class MCP4922(object):
             value = 4095
         if value < 0:
             value = 0
-        self.spi.open(self.spibus, self.spidevice)
+        #self.spi.open(self.spibus, self.spidevice)
         output |= value
         buf0 = (output >> 8) & 0xff
         buf1 = output & 0xff
         GPIO.output(self.cs, 0)
         self.spi.writebytes([buf0, buf1])
         GPIO.output(self.cs, 1)
-        self.spi.close
+        #self.spi.close
         return
 
     def setVoltage_gain(self, channel, value):
@@ -129,14 +132,14 @@ class MCP4922(object):
             value = 4095
         if value < 0:
             value = 0
-        self.spi.open(self.spibus, self.spidevice)
+        #self.spi.open(self.spibus, self.spidevice)
         output |= value
         buf0 = (output >> 8) & 0xff
         buf1 = output & 0xff
         GPIO.output(self.cs, 0)
         self.spi.writebytes([buf0, buf1])
         GPIO.output(self.cs, 1)
-        self.spi.close
+        #self.spi.close
         return
 
     def setVoltage_buffered(self, channel, value):
@@ -155,14 +158,14 @@ class MCP4922(object):
             value = 4095
         if value < 0:
             value = 0
-        self.spi.open(self.spibus, self.spidevice)
+        #self.spi.open(self.spibus, self.spidevice)
         output |= value
         buf0 = (output >> 8) & 0xff
         buf1 = output & 0xff
         GPIO.output(self.cs, 0)
         self.spi.writebytes([buf0, buf1])
         GPIO.output(self.cs, 1)
-        self.spi.close
+        #self.spi.close
         return
 
     def shutdown(self, channel):
@@ -178,11 +181,25 @@ class MCP4922(object):
         else:
             raise ValueError(
                 'MCP4922 Says: Wrong Channel Selected! Chose either 0 or 1!')
-        self.spi.open(self.spibus, self.spidevice)
+        #self.spi.open(self.spibus, self.spidevice)
         buf0 = (output >> 8) & 0xff
         buf1 = output & 0xff
         GPIO.output(self.cs, 0)
         self.spi.writebytes([buf0, buf1])
         GPIO.output(self.cs, 1)
+        #self.spi.close
+        return
+
+    def close(self):
+        """
+        Closes the device
+        """
         self.spi.close
+        return
+
+    def open(self):
+        """
+        Manually Open the device
+        """
+        self.spi.open(self.spibus, self.spidevice)
         return
