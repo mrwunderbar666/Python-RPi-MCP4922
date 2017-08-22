@@ -86,7 +86,7 @@ class MCP4922(object):
         GPIO.output(self.cs, 1)
         # As soon as MCP4922 object is created spidev bus and device are opened
         # otherwise causes memory leak and creates Errno 24
-        self.spi.open(self.spibus, self.spi.spidevice)
+        self.spi.open(self.spibus, self.spidevice)
 
     def setVoltage(self, channel, value):
         """
