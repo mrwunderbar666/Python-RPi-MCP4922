@@ -1,5 +1,5 @@
 # Python-RPi-MCP4922
-Python Library for driving MCP4922 DAC (Digital to Analog Converter) on Raspberry Pi 3 Model B+
+Python Library for driving MCP4922 DAC (Digital to Analog Converter) on Raspberry Pi 3 Model B+ and Rasbpberry Pi 4
 
 ## About MCP 4922
 The MCP4922 is a Digital to Analog Converter that has 2 Channels and 12 bit resolution.
